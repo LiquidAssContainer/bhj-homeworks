@@ -21,13 +21,10 @@ function clickSliderArrow() {
 
 for (let dot of sliderDots) {
     dot.addEventListener('click', () => {
-        for (let i = 0; i < sliderDots.length; i++) { // можно ли как-то ещё узнать, какой по счёту является кнопка, на которой произошёл клик?
-            if (sliderDots[i] === event.target) {
-                index = i;
-                changeActive('dot');
-                changeActive('item');
-            }
-        }
+        let dots = Array.from(sliderDots);
+        index = dots.indexOf(event.target);
+        changeActive('dot');
+        changeActive('item');
     })
 }
 
