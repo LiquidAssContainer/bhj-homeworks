@@ -33,8 +33,12 @@
 
 .autocomplete__list {
   list-style-type: none;
-  display: inline-block;
+  display: none;
   padding: 0;
+}
+
+.autocomplete__list_active {
+  display: inline-block;
 }
 
 .autocomplete__list li {

@@ -2,7 +2,13 @@
   position: fixed;
   bottom: 0;
   right: 0;
+  cursor: pointer;
 }
+
+.chat-widget_active {
+  cursor: default;
+}
+
 .chat-widget__area {
   display: none;
   width: 300px;
