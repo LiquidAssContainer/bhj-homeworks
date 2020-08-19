@@ -5,8 +5,8 @@ for (let checkbox of checkboxes) {
         let childInputs = [...e.target.closest('li').getElementsByTagName('input')];
 
         childInputs.forEach( (item) => {
-            item.checked = e.target.checked;
             item.indeterminate = false;
+            item.checked = e.target.checked;
         })
 
         checkParentIndeterminate(e.target);
@@ -24,13 +24,13 @@ for (let checkbox of checkboxes) {
                 hasUncheckedInput = parentUl.querySelector('input:not(:checked)');
 
             if (hasCheckedInput && hasUncheckedInput) {
+                parentInput.checked = false;
                 parentInput.indeterminate = true;
-                checkParentIndeterminate(parentInput);
-                return;
+            } else {
+                parentInput.indeterminate = false;
+                parentInput.checked = (hasCheckedInput) ? true : false;
             }
-            
-            parentInput.indeterminate = false;
-            parentInput.checked = (hasCheckedInput) ? true : false;
+
             checkParentIndeterminate(parentInput);
         }
     })

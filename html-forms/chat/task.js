@@ -32,6 +32,7 @@ document.addEventListener('keydown', (e) => {
         setTimeout( () => postMessage(botAnswer), 1500);
 
         clearTimeout(timer);
+        timer = setTimeout(askAQuestion, 1000 * 30);
     }
 })
 
@@ -41,17 +42,15 @@ function askAQuestion() {
 }
 
 function postMessage(message, author) {
-  let time = new Date().toLocaleTimeString('ru-RU');
-  time = time.substring(0, time.length - 3);
+    let time = new Date().toLocaleTimeString('ru-RU');
+    time = time.substring(0, time.length - 3);
 
-  messages.innerHTML += `
-    <div class="message${(author === 'client') ? ' message_client' : ''}">
-      <div class="message__time">${time}</div>
-      <div class="message__text">
-        ${message}
-      </div>
-    </div>`;
+    messages.innerHTML += `
+        <div class="message${(author === 'client') ? ' message_client' : ''}">
+            <div class="message__time">${time}</div>
+            <div class="message__text">${message}</div>
+        </div>`;
 
-  let container = document.getElementsByClassName('chat-widget__messages-container')[0];
-  container.scrollTo(0, container.offsetHeight);
+    let container = document.getElementsByClassName('chat-widget__messages-container')[0];
+    container.scrollTop = container.scrollHeight - container.clientHeight;
 }
