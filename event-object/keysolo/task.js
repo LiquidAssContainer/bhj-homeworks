@@ -4,6 +4,8 @@ class Game {
     this.wordElement = container.querySelector('.word');
     this.winsElement = container.querySelector('.status__wins');
     this.lossElement = container.querySelector('.status__loss');
+    this.timeElement = container.querySelector('.status__time');
+    this.timer = null;
 
     this.reset();
 
@@ -17,13 +19,13 @@ class Game {
   }
 
   registerEvents() {
-    /*
-      TODO:
-      Написать обработчик события, который откликается
-      на каждый введённый символ.
-      В случае правильного ввода слова вызываем this.success()
-      При неправильном вводе символа - this.fail();
-     */
+    document.addEventListener('keypress', (event) => {
+      if (this.currentSymbol.textContent === event.key.toLowerCase()) {
+        this.success();
+      } else {
+        this.fail();
+      }
+    })
   }
 
   success() {
@@ -50,8 +52,13 @@ class Game {
 
   setNewWord() {
     const word = this.getWord();
+    const time = word.length * 1000;
 
     this.renderWord(word);
+
+    clearInterval(this.timer);
+    this.lastTime = new Date();
+    this.timer = setInterval( () => this.updateTimer(time), 10);
   }
 
   getWord() {
@@ -66,13 +73,25 @@ class Game {
         'popcorn',
         'cinema',
         'love',
-        'javascript'
+        'javascript',
+        'я люблю javascript',
       ],
       index = Math.floor(Math.random() * words.length);
 
     return words[index];
   }
 
+  updateTimer(startValue) { // в первую очередь расчёт на точность измерения времени, погрешность равна интервалу времени в setInterval (10 миллисекунд)
+    const now = new Date();
+    const difference = now - this.lastTime;
+    const remainingTime = startValue - difference;
+
+    if (remainingTime <= 0) {
+      this.fail();
+    } else {
+      this.timeElement.textContent = Math.ceil(remainingTime / 1000);
+    }
+}
   renderWord(word) {
     const html = [...word]
       .map(
