@@ -29,7 +29,7 @@ document.addEventListener('click', (e) => {
         let index = [...answers].indexOf(target);
         requestPollResult(id, index);
     }
-});
+}, {once: true});
 
 function requestPollResult(id, index) {
     let xhr = new XMLHttpRequest();
