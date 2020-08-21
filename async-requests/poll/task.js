@@ -26,10 +26,13 @@ document.addEventListener('click', (e) => {
         // target.classList.add('poll__answer_voted');
         // modal.classList.add('modal__active'); // тут не оказалось готовых стилей и разметки; думаю, ничего страшного, если без модального окна
         let answers = pollAnswers.getElementsByClassName('poll__answer');
+        for (let button of answers) {
+            button.disabled = true;
+        }
         let index = [...answers].indexOf(target);
         requestPollResult(id, index);
     }
-}, {once: true});
+});
 
 function requestPollResult(id, index) {
     let xhr = new XMLHttpRequest();
