@@ -1,0 +1,7 @@
+#editor, .clear {
+    display: block;
+}
+
+.clear {
+    margin-top: 10px;
+}

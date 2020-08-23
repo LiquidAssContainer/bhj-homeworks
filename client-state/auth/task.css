@@ -35,3 +35,11 @@ body {
 .welcome_active {
   display: block;
 }
+
+.logout {
+  display: none;
+}
+
+.logout_active {
+  display: block;
+}
